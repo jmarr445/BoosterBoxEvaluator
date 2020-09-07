@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="1c1709a1-2ec6-451f-ad2e-9d7978920a76" name="Default Changelist" comment="" />
+    <list default="true" id="1c1709a1-2ec6-451f-ad2e-9d7978920a76" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Card.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application.py" beforeDir="false" afterPath="$PROJECT_DIR$/Application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebScraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebScraper.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,8 +49,8 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyIntegratedToolsModulesConfigurable" />
   </component>
   <component name="RunManager" selected="Python.Application">
     <configuration name="Application" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -79,6 +102,7 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -97,8 +121,26 @@
       <option name="project" value="LOCAL" />
       <updated>1599425289866</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Setting up extremely basic functionality">
+      <created>1599425641018</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1599425641018</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Setting up extremely basic functionality" />
@@ -109,46 +151,54 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="845" y="383" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1599425322370" />
+    <state x="732" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1599506029054">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="732" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1599506029054" />
     <state x="740" y="261" key="FileChooserDialogImpl" timestamp="1599425205529">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="261" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1599425205529" />
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1599425451866">
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom" timestamp="1599501007886">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1599425451866" />
-    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1599425451866">
+    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1599501007886" />
+    <state width="1899" height="282" key="GridCell.Tab.0.center" timestamp="1599501007885">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1599425451866" />
-    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1599425451866">
+    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1599501007885" />
+    <state width="1899" height="282" key="GridCell.Tab.0.left" timestamp="1599501007885">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1599425451866" />
-    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1599425451866">
+    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1599501007885" />
+    <state width="1899" height="282" key="GridCell.Tab.0.right" timestamp="1599501007886">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1599425451866" />
-    <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1599423779116">
+    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1599501007886" />
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1599500412863">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1599423779116" />
-    <state width="1899" height="348" key="GridCell.Tab.1.center" timestamp="1599423779115">
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1599500412863" />
+    <state width="1899" height="348" key="GridCell.Tab.1.center" timestamp="1599500412862">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1599423779115" />
-    <state width="1899" height="348" key="GridCell.Tab.1.left" timestamp="1599423779115">
+    <state width="1899" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1599500412862" />
+    <state width="1899" height="348" key="GridCell.Tab.1.left" timestamp="1599500412862">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1599423779115" />
-    <state width="1899" height="348" key="GridCell.Tab.1.right" timestamp="1599423779116">
+    <state width="1899" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1599500412862" />
+    <state width="1899" height="348" key="GridCell.Tab.1.right" timestamp="1599500412863">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1599423779116" />
-    <state x="552" y="240" key="Vcs.Push.Dialog.v2" timestamp="1599425411866">
+    <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1599500412863" />
+    <state x="461" y="165" key="SettingsEditor" timestamp="1599505648398">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="240" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1599425411866" />
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1599505648398" />
+    <state x="552" y="240" key="Vcs.Push.Dialog.v2" timestamp="1599425644894">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="240" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1599425644894" />
     <state x="666" y="308" key="git4idea.merge.GitPullDialog" timestamp="1599425511078">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -172,6 +222,7 @@
       <configuration name="PythonConfigurationType">
         <watch expression="_soup.tagStack[0]" />
         <watch expression="set_list._root.tk" />
+        <watch expression="args[0].widget" />
       </configuration>
     </watches-manager>
   </component>
