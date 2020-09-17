@@ -9,27 +9,42 @@ class WebScraper:
     This class provides methods to retrieve pricing information and parse it for relevant data
     """
 
+    # Used to enforce Singleton
+    __instance = None
+
+    @staticmethod
+    def get_instance():
+        """Retrieve the instance of WebScraper"""
+        if WebScraper.__instance is None:
+            WebScraper()
+        return WebScraper.__instance
+
     def __init__(self):
         """ Initialize an instance """
 
-        # Base URL
-        self._URL = "https://shop.tcgplayer.com/price-guide/pokemon/"
+        if WebScraper.__instance is not None:
+            raise Exception("This class is a singleton!")
+        else:
+            WebScraper.__instance = self
 
-        # Info
-        self._set_info = {}
+            # Base URL
+            self._URL = "https://shop.tcgplayer.com/price-guide/pokemon/"
 
-        # Retrieve contents of the Set drop down menu
-        page = requests.get(self._URL)
-        soup = BeautifulSoup(page.content, 'html.parser')
-        price_guide_drop_down = soup.find('select', attrs={"class": "priceGuideDropDown", "id": "set"}) \
-            .find_all('option')
+            # Info
+            self._set_info = {}
 
-        # Put the text and value attributes for each set into lists
-        self._set_list = []
-        self._set_list_names = []
-        for card_set in price_guide_drop_down:
-            self._set_list.append(card_set['value'])
-            self._set_list_names.append(card_set.text.strip())
+            # Retrieve contents of the Set drop down menu
+            page = requests.get(self._URL)
+            self._soup = BeautifulSoup(page.content, 'html.parser')
+            price_guide_drop_down = self._soup.find('select', attrs={"class": "priceGuideDropDown", "id": "set"}) \
+                .find_all('option')
+
+            # Put the text and value attributes for each set into lists
+            self._set_list = []
+            self._set_list_names = []
+            for card_set in price_guide_drop_down:
+                self._set_list.append(card_set['value'])
+                self._set_list_names.append(card_set.text.strip())
 
     def get_set_list_names(self):
         """ Returns the list of set list names """
@@ -42,18 +57,16 @@ class WebScraper:
         :param ind: The index of the selected set in the list box
         """
         page = requests.get(self._URL + self._set_list[ind])
-        soup = BeautifulSoup(page.content, 'html.parser')
-        self._set_info["card_list"] = self._get_cards(soup)
+        self._soup = BeautifulSoup(page.content, 'html.parser')
 
-    def _get_cards(self, soup):
+    def get_cards(self):
         """
         Parses the webpage and retrieves all card data
 
-        :param soup: Beautiful Soup 4 webpage
         :return: List of cards
         """
         card_list = []
-        card_tags = soup.find("table", class_="priceGuideTable tablesorter").find("tbody") \
+        card_tags = self._soup.find("table", class_="priceGuideTable tablesorter").find("tbody") \
             .find_all("tr")
         # Initialize a card object for each card on the page
         for card in card_tags:
@@ -64,7 +77,3 @@ class WebScraper:
                      card.find("td", class_="marketPrice").text.strip())
             )
         return card_list
-
-    @property
-    def set_info(self):
-        return self._set_info
