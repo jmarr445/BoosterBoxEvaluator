@@ -1,6 +1,5 @@
 from ApplicationManager import ApplicationManager
 from View import MainView
-from WebScraper import WebScraper
 
 
 class Controller:
@@ -8,9 +7,8 @@ class Controller:
 
     def __init__(self, root):
         """Initialize the controller"""
-        self.webscraper = WebScraper.get_instance()
-        self.view = MainView(self, root)
         self.model = ApplicationManager()
+        self.view = MainView(self, root)
 
     def calculate_price(self):
         """
@@ -18,13 +16,13 @@ class Controller:
         """
         self.view.box_prc_msg = str(self.model.calc_ev(self.view.rarity_amts))
 
-    def get_set_list_names(self):
+    def get_set_names(self):
         """
         Retrieves all set list names
 
         :return: A list of all set list names
         """
-        return self.webscraper.get_set_list_names()
+        return self.model.set_names
 
     def update_current_set(self, event):
         """Updates the curr set information when a new list item is selected"""

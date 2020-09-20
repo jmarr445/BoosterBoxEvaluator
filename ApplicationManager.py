@@ -1,7 +1,5 @@
-import tkinter as tk
-
+from APICaller import APICaller
 from CardSet import CardSet
-from WebScraper import WebScraper
 
 
 class ApplicationManager:
@@ -17,7 +15,11 @@ class ApplicationManager:
         # Currently loaded Card Set
         self._card_set = None
 
-        self._webscraper = WebScraper.get_instance()
+        # Use to make tcgplayer api calls
+        self._api_caller = APICaller()
+
+        # List of pokemon sets
+        self._sets = self._api_caller.get_all_sets()
 
     @property
     def curr_set_message(self):
@@ -31,6 +33,10 @@ class ApplicationManager:
     def rarities(self):
         return self._card_set.rarities
 
+    @property
+    def set_names(self):
+        return [group["name"] for group in self._sets["results"]]
+
     def calc_ev(self, rarity_amts):
         """
         Calculates the estimated value(ev) of a booster box given the expected amt of each card rarity per box
@@ -41,7 +47,7 @@ class ApplicationManager:
         total = 0
         for rarity in rarity_amts:
             total += rarity_amts[rarity] * self._card_set.avg_market_price(rarity)
-        return total
+        return round(total, 2)
 
     def update_current_set(self, event):
         lbox = event.widget
@@ -59,9 +65,9 @@ class ApplicationManager:
         :param set_name: Name of the selected set
         :return: None
         """
-        webscraper = WebScraper.get_instance()
-        webscraper.update_page(ind)
-        self._card_set = CardSet(set_name, webscraper.get_cards())
+        self._curr_groupID = self._sets["results"][ind]["groupId"]
+        self._card_set = CardSet(set_name, self._api_caller.get_cards_for_set(self._curr_groupID),
+                                 self._api_caller.get_card_prices(self._curr_groupID))
 
     def _update_avg_prc_msg(self):
         """

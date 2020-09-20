@@ -6,7 +6,7 @@ class CardSet:
     This class houses the main logic for calculating statistics for a card set
     """
 
-    def __init__(self, set_name, card_list):
+    def __init__(self, set_name, card_list, card_prices):
         """
         Initialize a CardSet
 
@@ -15,11 +15,13 @@ class CardSet:
         """
         self._set_name = set_name
         self._card_list = card_list
+        self._card_prices = card_prices["results"]
         self._rarities = []
         # Make a list of all rarities in the set
         for card in card_list:
-            if card.rarity not in self._rarities:
-                self._rarities.append(card.rarity)
+            curr_rarity = card["extendedData"][1]["value"]
+            if curr_rarity not in self._rarities:
+                self._rarities.append(curr_rarity)
         # Calculate the avg market val of each rarity
         self._avg_prices = {}
         for rarity in self._rarities:
@@ -48,10 +50,12 @@ class CardSet:
         # Calculate average market price
         for card in card_list:
             try:
+                product_id = card["productId"]
+                price_data = next((card for card in self._card_prices if card["productId"] == product_id), None)
                 # market_price is stored as a string with a $ in front
-                total += float(card.market_price.strip('$'))
-            except ValueError:
-                logging.exception("Unexpected market price encountered")
+                total += float(price_data['marketPrice'])
+            except (ValueError, TypeError):
+                logging.warning("Non-numeric price value encountered: {}".format(price_data['marketPrice']))
         return round(total / len(card_list), 2)
 
     def all_cards_of_rarity(self, rarity):
@@ -61,7 +65,7 @@ class CardSet:
         :param rarity: String with a rarity that matches the Card objects
         :return: List of all cards of the given rarity
         """
-        return [card for card in self._card_list if card.rarity == rarity]
+        return [card for card in self._card_list if card["extendedData"][1]["value"] == rarity]
 
     @property
     def rarities(self):

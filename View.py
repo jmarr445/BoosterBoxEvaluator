@@ -2,7 +2,6 @@ import tkinter as tk
 
 from AppComponents.RarityPane import RarityPane
 from ApplicationManager import ApplicationManager
-from WebScraper import WebScraper
 
 
 class MainView:
@@ -39,7 +38,7 @@ class MainView:
         self.create_frm_main()
 
         # Configure the set list list box
-        self.set_list = tk.StringVar(value=self.controller.get_set_list_names())
+        self.set_list = tk.StringVar(value=self.controller.get_set_names())
         self.set_list_box = tk.Listbox(self.root, listvariable=self.set_list, height=10, width=50)
         self.set_list_box.grid(column=1, row=0, sticky=(tk.N, tk.E, tk.W, tk.S))
         self.set_list_box.bind('<<ListboxSelect>>', self.controller.update_current_set)
@@ -115,5 +114,5 @@ class MainView:
 
         # The label for the total price
         self._lbl_box_price = tk.Label(self.frm_main, justify="center")
-        self.lbl_current_set['textvariable'] = self._box_prc_msg
-        self.lbl_current_set.grid(column=1, row=0, sticky=(tk.W, tk.E))
+        self._lbl_box_price['textvariable'] = self._box_prc_msg
+        self._lbl_box_price.grid(column=1, row=0, sticky=(tk.W, tk.E))
