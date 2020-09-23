@@ -29,4 +29,5 @@ class Controller:
         self.model.update_current_set(event)
         self.view.curr_set_msg = self.model.curr_set_message
         self.view.clear_set_info()
-        self.view.update_set_info(self.model.rarities, self.model.avg_price_msg)
+        self.view.update_set_info(self.model.rarities, self.model.avg_price_msg, self.model.num_cards_rarity,
+                                  self.model.card_ratios)

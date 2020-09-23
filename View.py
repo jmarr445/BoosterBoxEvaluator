@@ -1,6 +1,7 @@
 import tkinter as tk
 
 from AppComponents.RarityPane import RarityPane
+from AppComponents.RatioPane import RatioPane
 from ApplicationManager import ApplicationManager
 
 
@@ -12,24 +13,27 @@ class MainView:
     def __init__(self, controller, root):
         """Initialize the components of the app"""
         self.controller = controller
-
         self.root = root
 
         # Contains active RarityPane instances
         self._avg_price_msg_list = []
 
+        # Contains active RatioPane instances
+        self._ratio_pane_list = []
+
         # Text Variable Initialization
         self._curr_set_msg = tk.StringVar(value="Current Set: ")
         self._box_prc_msg = tk.StringVar(value=self.default_box_prc_msg)
 
-        # Main frame
+        # Root frame
         self.root.rowconfigure(0, minsize=720, weight=1)
         self.root.columnconfigure(0, minsize=960, weight=1)
         self.root.columnconfigure(1, weight=0)
         self.root.columnconfigure(2, weight=0)
 
-        # Set information display frame
+        # Set pricing display frame
         self.frm_main = None
+        self.frm_card_info = None
         self.lbl_current_set = None
         self.calculate_button = None
         self.total_value = None
@@ -40,6 +44,7 @@ class MainView:
         # Configure the set list list box
         self.set_list = tk.StringVar(value=self.controller.get_set_names())
         self.set_list_box = tk.Listbox(self.root, listvariable=self.set_list, height=10, width=50)
+        self.set_list_box.configure(exportselection=False)
         self.set_list_box.grid(column=1, row=0, sticky=(tk.N, tk.E, tk.W, tk.S))
         self.set_list_box.bind('<<ListboxSelect>>', self.controller.update_current_set)
 
@@ -76,16 +81,22 @@ class MainView:
     def rarity_amts(self):
         vals = {}
         for pane in self._avg_price_msg_list:
-            vals[pane.rarity] = int(pane.entry_val.get())
+            vals[pane.rarity] = float(pane.entry_val.get())
         return vals
 
-    def update_set_info(self, rarities, messages):
+    def update_set_info(self, rarities, messages, num_cards_rarity, card_ratios):
         """Creates widgets to display set info"""
         self._avg_price_msg_list = []
 
+        # Create RarityPane for each card rarity
         for idx, msg in enumerate(messages):
             # idx + 1 because the curr set label takes up row 0
             self._avg_price_msg_list.append(RarityPane(self.frm_main, rarities[idx], msg, idx + 1))
+
+        # Create RatioPane for each card rarity
+        for idx, rarity in enumerate(num_cards_rarity.keys()):
+            self._ratio_pane_list.append(RatioPane(self.frm_card_info, rarity, num_cards_rarity[rarity],
+                                                   card_ratios[rarity], idx))
 
         # Create the calculate button
         self.calculate_button = tk.Button(self.frm_main, text="Calculate", command=self.controller.calculate_price)
@@ -95,6 +106,7 @@ class MainView:
         """Prepares app for new set"""
         # Destroy widgets for previous set
         self.frm_main.destroy()
+        self.frm_card_info.destroy()
         self.create_frm_main()
 
         self._box_prc_msg.set(self.default_box_prc_msg)
@@ -116,3 +128,7 @@ class MainView:
         self._lbl_box_price = tk.Label(self.frm_main, justify="center")
         self._lbl_box_price['textvariable'] = self._box_prc_msg
         self._lbl_box_price.grid(column=1, row=0, sticky=(tk.W, tk.E))
+
+        # Set ratios display frame
+        self.frm_card_info = tk.Frame(master=self.root)
+        self.frm_card_info.grid(column=0, row=1, sticky=(tk.N, tk.E, tk.W, tk.S))

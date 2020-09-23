@@ -22,12 +22,20 @@ class ApplicationManager:
         self._sets = self._api_caller.get_all_sets()
 
     @property
+    def card_ratios(self):
+        return self._card_set.card_ratios
+
+    @property
     def curr_set_message(self):
         return "Current Set: {}".format(self._curr_set)
 
     @property
     def avg_price_msg(self):
         return self._avg_prc_msg
+
+    @property
+    def num_cards_rarity(self):
+        return self._card_set.num_cards_rarity
 
     @property
     def rarities(self):

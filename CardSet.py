@@ -15,13 +15,24 @@ class CardSet:
         """
         self._set_name = set_name
         self._card_list = card_list
+        self._total_cards = len(card_list)
         self._card_prices = card_prices["results"]
         self._rarities = []
+        # Create separate rarities for VMax and Full Art Ultra Rares
         # Make a list of all rarities in the set
-        for card in card_list:
+        for count, card in enumerate(card_list):
+            card_name = card["name"].lower()
+            curr_rarity = card["extendedData"][1]["value"]
+            if curr_rarity.lower() == "ultra rare":
+                if "vmax" in card_name:
+                    self._card_list[count]["extendedData"][1]["value"] = "Ultra Rare (VMax)"
+                elif "full art" in card_name:
+                    self._card_list[count]["extendedData"][1]["value"] = "Ultra Rare (Full Art)"
             curr_rarity = card["extendedData"][1]["value"]
             if curr_rarity not in self._rarities:
                 self._rarities.append(curr_rarity)
+        # Calculate ratios of each rarity
+        self._calc_rarity_ratios()
         # Calculate the avg market val of each rarity
         self._avg_prices = {}
         for rarity in self._rarities:
@@ -55,8 +66,21 @@ class CardSet:
                 # market_price is stored as a string with a $ in front
                 total += float(price_data['marketPrice'])
             except (ValueError, TypeError):
-                logging.warning("Non-numeric price value encountered: {}".format(price_data['marketPrice']))
+                logging.warning("Non-numeric price value encountered")
         return round(total / len(card_list), 2)
+
+    def _calc_rarity_ratios(self):
+        """Determine the number of cards for each rarity type + ratios"""
+        self._num_cards_rarity = {}
+        self._card_ratios = {}
+        for card in self._card_list:
+            curr_rarity = card["extendedData"][1]["value"]
+            if curr_rarity not in self._num_cards_rarity.keys():
+                self._num_cards_rarity[curr_rarity] = 1
+            else:
+                self._num_cards_rarity[curr_rarity] += 1
+        for rarity in self._num_cards_rarity:
+            self._card_ratios[rarity] = round(100 * self._num_cards_rarity[rarity] / self.total_cards, 1)
 
     def all_cards_of_rarity(self, rarity):
         """
@@ -68,5 +92,17 @@ class CardSet:
         return [card for card in self._card_list if card["extendedData"][1]["value"] == rarity]
 
     @property
+    def card_ratios(self):
+        return self._card_ratios
+
+    @property
+    def num_cards_rarity(self):
+        return self._num_cards_rarity
+
+    @property
     def rarities(self):
         return self._rarities
+
+    @property
+    def total_cards(self):
+        return self._total_cards

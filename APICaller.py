@@ -76,6 +76,3 @@ class APICaller:
             query_string["offset"] = str(int(query_string["offset"]) + 100)
 
         return val["results"]
-
-caller = APICaller()
-caller.get_all_sets()
